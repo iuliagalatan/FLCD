@@ -20,11 +20,19 @@ class SortedList:
         return False
 
     def binary_search(self, value):
-        i = bisect_left(self.__sortedList, value)
-        if i != len(self.__sortedList) and self.__sortedList[i][0] == value:
-            return self.__sortedList[i][1]
-        else:
-            return -1
+        start = 0
+        end = len(self.__sortedList) - 1
+
+        while start <= end:
+            middle = (start + end) // 2
+            midpoint = self.__sortedList[middle]
+            if midpoint[0] > value:
+                end = middle - 1
+            elif midpoint[0] < value:
+                start = middle + 1
+            else:
+                return midpoint[0]
+
 
     def __str__(self):
         return str(self.__sortedList)

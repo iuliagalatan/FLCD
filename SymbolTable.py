@@ -9,7 +9,7 @@ class SymbolTable:
         return self.__sortedList.insert(value)
 
     def get(self, value):
-        return self.__sortedList.search(value)
+        return self.__sortedList.binary_search(value)
 
     def __str__(self):
         return str(self.__sortedList)
