@@ -31,7 +31,7 @@ class SortedList:
             elif midpoint[0] < value:
                 start = middle + 1
             else:
-                return midpoint[0]
+                return middle
 
 
     def __str__(self):
