@@ -1,5 +1,6 @@
 
 from Scanner import *
+from pprint import pprint
 
 '''
 symbolTable = SymbolTable()
@@ -21,13 +22,13 @@ print(symbolTable.get("ab"))
 
 print(symbolTable)
 '''
-scaner = Scanner("p3.txt")
+scaner = Scanner("p1.txt")
 error = scaner.tokenize()
 if not error:
 
     scaner.construct_pif2()
     print(scaner.get_PIF())
-    print(scaner.get_PIF2())
+    pprint(scaner.get_PIF2())
     file = open("pif.txt", 'w')
     file.write(str(scaner.get_PIF()))
     file.close()
