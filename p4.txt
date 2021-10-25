@@ -1,0 +1,18 @@
+int n;
+ array[101] int a;
+ read(n);
+int i;
+ i = 1;
+int $sum;
+ sum = 0;
+while (i<=n)
+ do
+read(a[i]);
+ i = i + 1
+end-while
+i = 1;
+while (i <= n)
+do
+ sum = sum + a[i]
+end-while
+write(sum);

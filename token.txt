@@ -40,3 +40,4 @@ do,38
 then,39
 end-while,40
 array,41
+sqrt,42

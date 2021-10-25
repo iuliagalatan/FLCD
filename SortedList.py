@@ -5,8 +5,10 @@ class SortedList:
         self.__cnt = 0
 
     def insert(self, value):
+        if ( value == 'n'):
+            print("aici")
         id = self.search(value)
-        if id != False:
+        if id != -1:
             return id
         self.__sortedList.append((value, self.__cnt))
         self.__cnt += 1
@@ -17,7 +19,7 @@ class SortedList:
         for i in self.__sortedList:
             if i[0] == value:
                 return i[1]
-        return False
+        return -1
 
     def binary_search(self, value):
         start = 0
