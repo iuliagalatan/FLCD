@@ -22,7 +22,7 @@ print(symbolTable.get("ab"))
 
 print(symbolTable)
 '''
-scaner = Scanner("p1.txt")
+scaner = Scanner("p4.txt")
 error = scaner.tokenize()
 if not error:
 

@@ -1,5 +1,5 @@
-int n;
- array[101] int a;
+'s' int n;
+ array[0101] int a;
  read(n);
 int i;
  i = 1;

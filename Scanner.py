@@ -59,7 +59,7 @@ class Scanner:
         file = open(self.__filename, 'r')
         line = file.readline().strip("\n")
         self.__delimiters = ";", ",", "{", "}", "(", ")", ":", "*", "/", "<", ">", "and", "or", "!=", "==", "<=", \
-                            ">=", "=", " ",
+                            ">=", "=", " "
         while line != "":
             regexPattern = '|'.join(map(re.escape, " "))
             tokens = re.split(regexPattern, line)
@@ -124,12 +124,11 @@ class Scanner:
                     tokens.remove(element)
 
 
-
             if len(self.__error) == 0:
                 for i in range(len(tokens)):
                     current_error = ""
                     found = False
-                    
+
 
                     if tokens[i] is not None and len(tokens[i]) > 0  and len(
                             list(tokens[i])) > 0 and tokens[i] not in ['+', '-']:

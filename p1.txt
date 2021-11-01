@@ -1,6 +1,6 @@
 begin
-float a ;
 float b ;
+float a ;
 float c ;
 read( a ) ;
 read( b ) ;
