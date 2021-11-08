@@ -1,9 +1,6 @@
 from finiteAutomata import *
 
 
-
-
-
 def show_menu():
     print("1. Show the set of states")
     print("2. Show the alphabet")
@@ -20,6 +17,11 @@ if __name__ == '__main__':
     while True:
         show_menu()
         option = int(input("Please choose one option "))
+        if fa.wrong == True:
+            print("wrong input")
+            break
+
+
         if option == 1:
             print(fa.getStates())
         elif option == 2:
@@ -33,7 +35,8 @@ if __name__ == '__main__':
         elif option == 6:
             print(fa.is_DFA())
         elif option == 7:
-            sequence = input()
-            print(fa.is_sequence_accepted(sequence))
+            seq = input("Enter sequence")
+            seq = seq.split()
+            print(fa.is_sequence_accepted(seq))
         else:
             break
