@@ -1,0 +1,85 @@
+N->{program,statements,statement,simple_statement,declaration_statement,type1,array_declaration,type,assignment_statement,expression,term,factor,array_element,io_statement,if_statement,loop_statement,while_statement,condition,relation,identifier,number,digit,nonzerodigit,letter}
+E->{+,-,*,/,=,==,<,<=,>,>=,and,or,!=,;,(,),[,]," ",string,float,int,bool,read,write,while,do,then,if,end,else,a,b,c,d,e,f,g,h,j,i,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9}
+S=program
+program->statements
+program->epsilon
+declaration_statement->type identifier
+declaration_statement->epsilon
+type1->string
+type1->float
+type1->int
+type1->bool
+type->type1
+type->array_declaration
+expression->expression + term
+expression->expression - term
+expression-> term
+term->term * factor
+term->term / factor
+term->factor
+factor->identifier
+factor->( expression )
+factor->number
+factor->array_element
+array_element->type1 identifier [ number ]
+assignment_statement->identifier = expression
+io_statement->read identifier
+io_statement->write identifier
+if_statement->if ( condition ) then statements else statement
+loop_statement->while_statement
+while_statement->while ( condition ) do statements end-while
+condition->expression relation expression
+relation-><
+relation-><=
+relation->>
+relation->>=
+relation->==
+relation->!=
+relation->and
+relation->or
+statement->simple_statement
+statement->if_statement
+statement->loop_statement
+simple_statement->declaration_statement
+simple_statement->assignment_statement
+simple_statement->io_statement
+identifier->letter
+letter->a
+letter->b
+letter->c
+letter->d
+letter->e
+letter->f
+letter->g
+letter->g
+letter->i
+letter->j
+letter->k
+letter->l
+letter->m
+letter->n
+letter->o
+letter->p
+letter->q
+letter->r
+letter->s
+letter->t
+letter->u
+letter->v
+letter->w
+letter->x
+letter->y
+letter->z
+digit->0
+digit->nonzerodigit
+nonzerodigit->1
+nonzerodigit->2
+nonzerodigit->3
+nonzerodigit->4
+nonzerodigit->5
+nonzerodigit->6
+nonzerodigit->7
+nonzerodigit->8
+nonzerodigit->9
+number->nonzerodigit digit
+number->- nonzerodigit digit

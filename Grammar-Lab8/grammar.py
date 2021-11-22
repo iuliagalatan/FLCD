@@ -15,7 +15,7 @@ class Grammar:
         line = file.readline().strip()
 
         # read the nonterminals
-        delimiters = "=", "{", "}"
+        delimiters = "->", "{", "}"
         regexPattern = '|'.join(map(re.escape, delimiters))
         tokens = re.split(regexPattern, line)
 
@@ -26,7 +26,7 @@ class Grammar:
 
         #read the alphabet
         line = file.readline().strip()
-        delimiters = "=", "{", "}"
+        delimiters = "->", "{", "}"
         regexPattern = '|'.join(map(re.escape, delimiters))
         tokens = re.split(regexPattern, line)
         alphabet = tokens[2].split(",")
