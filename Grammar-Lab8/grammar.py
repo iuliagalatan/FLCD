@@ -39,7 +39,7 @@ class Grammar:
         token = line.split("=")
         self.__startingSymbol = token[1]
 
-        line = file.readline().strip()
+
         # read the productions
         for line in file:
             line = line.strip()
@@ -53,8 +53,6 @@ class Grammar:
                 self.__productions[tokens[0]] = [tokens[2]]
             else:
                 self.__productions[tokens[0]].append(tokens[2])
-
-
 
 
 
@@ -73,12 +71,17 @@ class Grammar:
     def getProdForNonTerm(self, nonTerminal):
         if nonTerminal not in self.__productions.keys():
             return []
-        return self.__productions[nonTerminal]
+
+        prod = []
+        for item in self.__productions[nonTerminal]:
+            prod.append([item])
+        return prod
 
 
     def checkCFG(self):
         for key in self.__productions.keys():
             if key not in self.__nonterminals:
+                print(key)
                 return False
             left = self.__productions[key]
             for t in left:
@@ -86,6 +89,13 @@ class Grammar:
                 for symbol in t:
                     if symbol != "":
                         if symbol not in self.__nonterminals and symbol not in self.__alphabet and symbol != "epsilon":
+                            print(symbol)
                             return False
+        return True
+
+
+    def isTerminal(self, symb):
+        if symb not in self.__alphabet:
+            return False
         return True
 

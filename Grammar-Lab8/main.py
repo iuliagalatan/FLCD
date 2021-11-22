@@ -1,4 +1,5 @@
 from grammar import *
+from Parser import *
 def menu():
     print("0. Exit")
     print("1. Set of NonTerminals")
@@ -15,7 +16,10 @@ if __name__ == '__main__':
     option=-1
 
 
-    grammar = Grammar("g1.in")
+    grammar = Grammar("g2.in")
+    parser = Parser(grammar)
+    parser.getCannonicalCollection()
+
 
     print(grammar.checkCFG())
     while(option!=0):

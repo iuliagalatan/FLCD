@@ -6,7 +6,7 @@ program->epsilon
 declaration_statement->type identifier
 declaration_statement->epsilon
 type1->string
-type1->float
+type1 number->float
 type1->int
 type1->bool
 type->type1
