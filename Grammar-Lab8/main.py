@@ -16,9 +16,9 @@ if __name__ == '__main__':
     option=-1
 
 
-    grammar = Grammar("g2.in")
+    grammar = Grammar("g3.in")
     parser = Parser(grammar)
-    parser.getCannonicalCollection()
+    #parser.getCannonicalCollection()
 
 
     print(grammar.checkCFG())
@@ -35,3 +35,6 @@ if __name__ == '__main__':
         elif option==5:
             nonterm = input("non-terminal")
             print(grammar.getProdForNonTerm(nonterm))
+        elif option ==6:
+            sequence = input("sequence for lr(0) parser:")
+            print(parser.parse(sequence))

@@ -8,6 +8,7 @@ class Grammar:
         self.__startingSymbol = None
         self.__alphabet = []
         self.__productions = {}
+        self.p = []
         self.readFromFile()
 
     def readFromFile(self):
@@ -53,6 +54,9 @@ class Grammar:
                 self.__productions[tokens[0]] = [tokens[2]]
             else:
                 self.__productions[tokens[0]].append(tokens[2])
+
+            x = [tokens[0], tokens[2]]
+            self.p.append(x)
 
 
 
