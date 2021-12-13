@@ -7,6 +7,7 @@ def menu():
     print("3. Starting Symbol")
     print("4. Productions")
     print("5. Get productions for a given non-terminal")
+    print("6. Parse sequence")
 
 
 if __name__ == '__main__':
@@ -36,5 +37,9 @@ if __name__ == '__main__':
             nonterm = input("non-terminal")
             print(grammar.getProdForNonTerm(nonterm))
         elif option ==6:
+
             sequence = input("sequence for lr(0) parser:")
-            print(parser.parse(sequence))
+            try:
+                parser.parse(sequence)
+            except Exception as e:
+                print(e)

@@ -17,14 +17,13 @@ class Parser:
                 alpha = elem[:dotInd]
                 bBeta = elem[dotInd + 1:].strip()
 
-                
                 if len(bBeta) != 0:
                     B = bBeta[0]
                     if self.__grammar.isTerminal(B):
                         continue
-    
+
                     prodsforB = self.__grammar.getProdForNonTerm(B)
-    
+
                     for p in prodsforB:
                         for t in p:
                             production = (B, ['.' + t])
@@ -34,7 +33,7 @@ class Parser:
         return C
 
     def getCannonicalCollection(self):
-        C = [self.closure([('S1', ['.'+ self.__grammar.getStartingSymb()])])]
+        C = [self.closure([('S1', ['.' + self.__grammar.getStartingSymb()])])]
 
         done = False
 
@@ -49,22 +48,21 @@ class Parser:
                         done = False
         return C
 
-
     def goTo(self, state, symbol):
-        #mutam punctul daca symbol == primul symbol de dupa punct
+        # mutam punctul daca symbol == primul symbol de dupa punct
         C = []
         for production in state:
             index = production[1][0].find('.')
             alpha = production[1][0][:index]
             Xbeta = production[1][0][index + 1:].strip()
 
-            if len(Xbeta)!= 0:
+            if len(Xbeta) != 0:
                 X, beta = Xbeta[0], Xbeta[1:]
                 if X == symbol:
                     if alpha != "":
-                        resultProd = (production[0], [alpha +' ' +X + '.' + beta])
+                        resultProd = (production[0], [alpha + ' ' + X + '.' + beta])
                     else:
-                        resultProd = (production[0], [alpha +X + '.' + beta])
+                        resultProd = (production[0], [alpha + X + '.' + beta])
                     C = C + [resultProd]
 
         return self.closure(C)
@@ -75,7 +73,7 @@ class Parser:
 
         for state in states:
             print(state)
-        index  = 0
+        index = 0
 
         for state in states:
             FirstRule = 0
@@ -84,10 +82,10 @@ class Parser:
 
             for prod in state:
                 if prod[0] == 'S1':
-                    ok= True
-                index = prod[1][0].find('.')
-                alpha = prod[1][0][:index]
-                beta = prod[1][0][index + 1:]
+                    ok = True
+                ind = prod[1][0].find('.')
+                alpha = prod[1][0][:ind]
+                beta = prod[1][0][ind + 1:].strip()
                 if len(beta) != 0:
                     FirstRule += 1
                 else:
@@ -118,6 +116,22 @@ class Parser:
             index = index + 1
         return table
 
+    def production_string(self, output):
+        for ind in output:
+            print(self.__grammar.p[int(ind)])
+
+    def ParserOutput(self, output):
+        out = str(self.__grammar.p[int(output[0])][0]) + "=> " + str(self.__grammar.p[int(output[0])][1])
+        initial = self.__grammar.p[int(output[0])][1]
+        for ind in output:
+            if int(ind) != 0:
+                out += "=>"
+                prod = self.__grammar.p[int(ind)]
+                out += initial.replace(prod[0], prod[1], 1)
+                initial = initial.replace(prod[0], prod[1], 1)
+        print(out)
+
+
 
     def parse(self, inputSequence):
         table = self.Table()
@@ -125,7 +139,6 @@ class Parser:
         self.parsingStack = ['0']
         self.inputStack = [symbol for symbol in inputSequence]
         self.output = []
-
 
         print(table)
 
@@ -136,13 +149,17 @@ class Parser:
                 symbol = self.inputStack.pop(0)
             else:
                 symbol = None
-            if  symbol != None and table[state][symbol] and table[state]["action"] == "shift":
+
+            if symbol != None and symbol not in table[state]:
+                raise Exception("Symbol " + symbol + " not in table of state " + str(state))
+
+            if symbol != None and table[state][symbol] and table[state]["action"] == "shift":
                 self.parsingStack.append(symbol)
-                self.parsingStack.append( str(table[state][symbol]))
+                self.parsingStack.append(str(table[state][symbol]))
 
             elif table[state]["action"] == "acc":
                 if (len(self.inputStack)) != 0:
-                    raise Exception("somethink went wrong")
+                    raise Exception("something went wrong")
                 self.parsingStack = []
             else:
                 try:
@@ -155,7 +172,7 @@ class Parser:
                 toRemoveFromWorkingStack = ' '.join(toRemoveFromWorkingStack).split()
 
                 while len(toRemoveFromWorkingStack) > 0 and len(self.parsingStack) > 0:
-                    if(self.parsingStack[-1].isnumeric()):
+                    if (self.parsingStack[-1].isnumeric()):
                         self.parsingStack.pop()
                     if self.parsingStack[-1] == toRemoveFromWorkingStack[-1]:
                         toRemoveFromWorkingStack.pop()
@@ -168,8 +185,6 @@ class Parser:
                 self.inputStack.insert(0, production[0])
                 self.output.insert(0, str(reduceIndex))
 
-        return self.output
-
-
-
+        self.production_string(self.output)
+        return self.ParserOutput(self.output)
 
