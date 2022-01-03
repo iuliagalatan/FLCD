@@ -1,0 +1,77 @@
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+int lines = 0;
+%}
+
+%option noyywrap
+
+DIGIT             [0-9]
+WORD              ([a-zA-Z])*
+NUMBER            [-]*[1-9][0-9]*|0
+FLOAT_CONST       {NUMBER}+"."{DIGIT}*
+BOOLEAN           [true]|[false]
+CONST             {WORD}|{NUMBER}|{FLOAT_CONST}|{BOOLEAN}
+IDENTIFIER        [a-zA-Z][a-zA-Z0-9_]{0,9}
+
+%%
+
+"int"          {printf( "Reserved word: %s\n", yytext );}
+"char"         {printf( "Reserved word: %s\n", yytext );}
+"float"        {printf( "Reserved word: %s\n", yytext );}
+"bool"         {printf( "Reserved word: %s\n", yytext );}
+"const"        {printf( "Reserved word: %s\n", yytext );}
+"if"           {printf( "Reserved word: %s\n", yytext );}
+"else"         {printf( "Reserved word: %s\n", yytext );}
+"begin"        {printf( "Reserved word: %s\n", yytext );}
+"end"          {printf( "Reserved word: %s\n", yytext );}
+"read"         {printf( "Reserved word: %s\n", yytext );}
+"write"        {printf( "Reserved word: %s\n", yytext );}
+"while"        {printf( "Reserved word: %s\n", yytext );}
+"break"        {printf( "Reserved word: %s\n", yytext );}
+"true"         {printf( "Reserved word: %s\n", yytext );}
+
+
+{IDENTIFIER}           {printf( "Identifier: %s\n", yytext );}
+
+{CONST}          {printf( "Constant: %s\n", yytext );}
+
+
+";"                {printf( "Separator: %s\n", yytext );}
+","                {printf( "Separator: %s\n", yytext );}
+"."                {printf( "Separator: %s\n", yytext );}
+"+"                {printf( "Operator: %s\n", yytext );}
+"-"                {printf( "Operator: %s\n", yytext );}
+"*"                {printf( "Operator: %s\n", yytext );}
+"/"                {printf( "Operator: %s\n", yytext );}
+"("                {printf( "Separator: %s\n", yytext );}
+"["                {printf( "Separator: %s\n", yytext );}
+"]"                {printf( "Separator: %s\n", yytext );}
+")"                {printf( "Separator: %s\n", yytext );}
+"<"                {printf( "Operator: %s\n", yytext );}
+">"                {printf( "Operator: %s\n", yytext );}
+"<="               {printf( "Operator: %s\n", yytext );}
+">="               {printf( "Operator: %s\n", yytext );}
+"!="               {printf( "Operator: %s\n", yytext );}
+"="                {printf( "Operator: %s\n", yytext );}
+"=="               {printf( "Separator: %s\n", yytext );}
+"{"                {printf( "Separator: %s\n", yytext );}
+"}"                {printf( "Separator: %s\n", yytext );}
+"-0"               {printf("Illegal symbol at line %d\n", lines); return -1;}
+"+0"               {printf("Illegal symbol at line %d\n", lines); return -1;}
+
+
+[0-9]+[a-zA-Z]+    {printf("Illegal identifier at line %d\n", lines); return -1;}
+[ \t]+                {}
+
+[\n]+  {++lines;}
+
+%%
+
+int main()
+{
+printf("hello");
+yylex();
+printf("Done");
+}
